@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="boardMapper">
+	
+	<!-- 게시판 글 작성 -->
+	<insert id="insert">
+		INSERT INTO myboard(		Btitle,
+									Bcontent,
+									Bwriter,
+									BregDt,
+									BmodDt,
+									Bhit	)
+					VALUES(			#{title},
+									#{content},
+									#{writer},
+									NOW(),
+									NOW(),
+									0)
+	</insert>
+	
+	<!-- 	게시판 목록 보기(보고 싶은 것만 지정해 줄떄는 as를 사용하여 BoardVO의 이름을 매핑해 줘야 한다
+		안그러면 null값이 들어감-->
+	<select id="listPage" resultType="com.mayfarm.vo.BoardVO" parameterType="com.mayfarm.vo.SearchCriteria">
+		select	VO.Bno as no,
+				VO.Btitle as title,
+				VO.Bwriter as writer,
+				VO.BregDt as regDt,
+				VO.Bhit as hit
+		FROM(
+				SELECT	*
+				FROM myboard
+				WHERE 1=1
+					<include refid="search"></include>
+				order by Bno asc
+		) VO
+		ORDER BY VO.Bno desc
+<!-- 		Limit 1, 10 -->
+		Limit #{rowStart}, #{perPageNum}
+		
+	</select>
+	
+	<!-- 게시물 총 갯수 -->
+	<select id="listCount" resultType="int" parameterType="com.mayfarm.vo.SearchCriteria">
+		SELECT COUNT(Bno)
+			FROM myboard
+			WHERE 1=1
+		<include refid="search"></include>
+			AND Bno > 0
+			
+	</select>
+	
+	<!-- 검색 -->
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">AND Btitle LIKE CONCAT('%',#{keyword},'%')</if>
+			<if test="searchType == 'c'.toString()">AND BContent LIKE CONCAT('%',#{keyword},'%')</if>
+			<if test="searchType == 'w'.toString()">AND Bwriter LIKE CONCAT('%',#{keyword},'%')</if>
+			<if test="searchType == 'tc'.toString()">AND Btitle LIKE CONCAT('%',#{keyword},'%') OR BContent LIKE CONCAT('%',#{keyword},'%')</if>
+		</if>
+	</sql>
+	
+	<!-- 게시물 조회 -->
+	<select id="read" parameterType="int" resultType="com.mayfarm.vo.BoardVO">
+		SELECT	Bno as no,
+				Btitle as title,
+				Bcontent as content,
+				Bwriter as writer,
+				BregDt as regDt,
+				BmodDt as modDt,
+				Bhit as hit
+		FROM myboard
+		WHERE Bno = #{no}
+	</select>
+	
+	<!-- 게시물 수정 -->
+	<update id="update" parameterType="com.mayfarm.vo.BoardVO">
+		UPDATE	myboard
+		SET	Btitle = #{title},
+			Bcontent = #{content},
+			BmodDt = NOW()
+		WHERE Bno = #{no}
+	</update>
+	
+	<!-- 게시물 삭제 -->
+	<delete id ="delete" parameterType="int">
+		DELETE
+		FROM myboard
+		WHERE Bno = #{no}
+	</delete>
+</mapper>
