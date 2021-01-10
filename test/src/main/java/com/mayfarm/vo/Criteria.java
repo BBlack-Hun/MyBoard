@@ -1,5 +1,8 @@
 package com.mayfarm.vo;
 
+import lombok.Data;
+
+@Data
 public class Criteria {
 	
 	private int page;

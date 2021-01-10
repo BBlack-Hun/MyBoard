@@ -37,6 +37,13 @@
 								+"&perPageNum${scrl.perPageNum}"
 								+"&searchType=${scrl.searchType}&keyword=${scrl.keyword}";
 			})
+			
+			// 댓글 작성
+			$(".replyWriteBtn").on("click", function(){
+				var formObj = $("form[name='replyForm']");
+				formObj.attr("action", "/board/replyWrite");
+				formObj.submit();
+			});
 		
 		})
 		
@@ -98,7 +105,40 @@
 					<button type="submit" class="update_btn">수정</button>
 					<button type="submit" class="delete_btn">삭제</button>
 					<button type="submit" class="list_btn">목록</button>	
-				</div>			
+				</div>
+				
+				<!-- 댓글 -->
+				<div id="reply">
+					<ol class="replyList">
+						<c:forEach items="${replyList}" var="replyList">
+							<li>
+								<p>
+								작성자 : ${replyList.writer}<br />
+								작성 날짜 :  <fmt:formatDate value="${replyList.regDt}" pattern="yyyy-MM-dd" />
+								</p>
+								
+								<p>${replyList.content}</p>
+							</li>
+						</c:forEach> 
+					</ol>
+				</div>
+				
+				<form name="replyForm" method="post">
+					<input type="hidden" id="no" name="no" value="${read.no}" />
+					<input type="hidden" id ="page" name="page" value="${scrl.page}" />
+					<input type="hidden" id="perPageNum" name="perPageNum" value="${scrl.perPageNum}"> 
+					<input type="hidden" id="searchType" name="searchType" value="${scrl.searchType}">
+					<input type="hidden" id="keyword" name="keyword" value="${scrl.keyword }" >
+					
+					<div>
+						<label for="writer">댓글 작성자</label><input type="text" id="writer" name="writer" />
+						<br/>
+						<label for="content">댓글 내용</label><input type="text" id="content" name="content" />
+					</div>
+					<div>
+						<button type="button" class="replyWriteBtn">작성</button>
+					</div>
+				</form>	
 			</section>
 			<hr />
 		</div>

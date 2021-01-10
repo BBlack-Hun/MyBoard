@@ -6,7 +6,9 @@ import java.net.URLEncoder;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import lombok.Data;
 
+@Data
 public class PageMaker {
 	private int totalCount;
 	private int startPage;

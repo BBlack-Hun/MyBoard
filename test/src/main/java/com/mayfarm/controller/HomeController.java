@@ -2,6 +2,7 @@ package com.mayfarm.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import javax.inject.Inject;
@@ -13,10 +14,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mayfarm.service.BoardService;
+import com.mayfarm.service.ReplyService;
 import com.mayfarm.vo.BoardVO;
 import com.mayfarm.vo.PageMaker;
+import com.mayfarm.vo.ReplyVO;
 import com.mayfarm.vo.SearchCriteria;
 
 /**
@@ -29,6 +33,9 @@ public class HomeController {
 	
 	@Inject
 	BoardService service;
+	
+	@Inject
+	ReplyService replyService;
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -89,6 +96,8 @@ public class HomeController {
 		model.addAttribute("read", service.read(boardVO.getNo()));
 		model.addAttribute("scrl", scrl);
 		
+		List<ReplyVO> replyList = replyService.readReply(boardVO.getNo());
+		model.addAttribute("replyList", replyList);
 		
 		return "board/readView";
 	}
@@ -121,5 +130,22 @@ public class HomeController {
 		service.delete(boardVO.getNo());
 		
 		return "redirect:/board/index";
+	}
+	
+	// 댓글 작성
+	@RequestMapping(value="/board/replyWrite", method = RequestMethod.POST)
+	public String replyWrite(ReplyVO vo, SearchCriteria scrl, RedirectAttributes rttr) throws Exception {
+		logger.info("reply Write");
+		
+		replyService.writeReply(vo);
+		
+		// 댓글을 작성하였을때, 그 페이지로 리다이렉션을 위한 필요한 값을 저장
+		rttr.addAttribute("no", vo.getNo());
+		rttr.addAttribute("page", scrl.getPage());
+		rttr.addAttribute("perPageNum", scrl.getPerPageNum());
+		rttr.addAttribute("searchType", scrl.getSearchType());
+		rttr.addAttribute("keyword", scrl.getKeyword());
+		
+		return "redirect:/board/readView";
 	}
 }

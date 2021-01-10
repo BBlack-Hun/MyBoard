@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="replyMapper">
+	
+	<!-- 댓글 조회 -->
+	<select id="readReply" resultType="com.mayfarm.vo.ReplyVO">
+		SELECT
+			Rno as rno, Rcontent as content, Rwriter as writer, RregDt as regDt
+		FROM myreply
+		WHERE Bno = #{no}
+	</select>
+	
+	<!-- 댓글 작성 -->
+	<insert id="writeReply">
+		INSERT INTO myreply
+			(Bno, Rcontent, Rwriter, RregDt)
+		VALUES
+			(#{no}, #{content}, #{writer}, NOW())
+	</insert>
+	
+	<!-- 댓글 수정 -->
+	<update id="updateReply" parameterType="com.mayfarm.vo.ReplyVO">
+		UPDATE myreply set Bcontent = #{content}
+		WHERE Rno = #{rno}
+	</update>
+	
+	<!-- 댓글 삭제 -->
+	<delete id = "deleteReply" parameterType="com.mayfarm.vo.ReplyVO">
+		DELETE FROM myreply
+		WHERE Rno = {rno}
+	</delete>
+	<!-- 선택된 댓글 조회 -->
+	<select id="selectReply" resultType="com.mayfarm.vo.ReplyVO">
+		SELECT
+			Bno, Rno, Rcontent, Rwriter, RregDt
+		FROM myreply
+		WHERE Rno = #{rno}
+	</select>
+</mapper>
