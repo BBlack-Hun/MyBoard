@@ -148,4 +148,58 @@ public class HomeController {
 		
 		return "redirect:/board/readView";
 	}
+	
+	// 댓글 수정 GET
+	@RequestMapping(value="/board/replyUpdateView", method=RequestMethod.GET)
+	public String replyUpdateView(ReplyVO vo, SearchCriteria scrl, Model model) throws Exception {
+		logger.info("reply Write");
+		
+		model.addAttribute("replyUpdate", replyService.selectReply(vo.getRno()));
+		model.addAttribute("scrl", scrl);
+		
+		return "/board/replyUpdateView";
+	}
+	
+	// 댓글 수정 POST
+	@RequestMapping(value="/board/replyUpdate", method=RequestMethod.POST)
+	public String replyUPdate(ReplyVO vo, SearchCriteria scrl, RedirectAttributes rttr) throws Exception {
+		logger.info("reply Write");
+		
+		replyService.updateReply(vo);
+		
+		rttr.addAttribute("no", vo.getNo());
+		rttr.addAttribute("page", scrl.getPage());
+		rttr.addAttribute("perPageNum", scrl.getPerPageNum());
+		rttr.addAttribute("searchType", scrl.getSearchType());
+		rttr.addAttribute("keyword", scrl.getKeyword());
+		
+		return "redirect:/board/readView";
+	}
+	
+	//댓글 삭제 GET
+	@RequestMapping(value="/board/replyDeleteView", method=RequestMethod.GET)
+	public String replyDeleteView(ReplyVO vo, SearchCriteria scrl, Model model) throws Exception {
+		logger.info("reply Delete");
+		
+		model.addAttribute("replyDelete", replyService.selectReply(vo.getRno()));
+		model.addAttribute("scrl", scrl);
+		
+		return "/board/replyDeleteView";
+	}
+	
+	// 댓글 삭제
+	@RequestMapping(value="/board/replyDelete", method=RequestMethod.POST)
+	public String replyDelete(ReplyVO vo, SearchCriteria scrl, RedirectAttributes rttr) throws Exception {
+		logger.info("reply Delete");
+		
+		replyService.deleteReply(vo);
+		
+		rttr.addAttribute("bno", vo.getNo());
+		rttr.addAttribute("page", scrl.getPage());
+		rttr.addAttribute("perPageNum", scrl.getPerPageNum());
+		rttr.addAttribute("searchType", scrl.getSearchType());
+		rttr.addAttribute("keyword", scrl.getKeyword());
+
+		return "redirct:/board/readView";
+	}
 }

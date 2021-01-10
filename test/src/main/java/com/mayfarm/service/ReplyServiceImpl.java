@@ -20,7 +20,18 @@ public class ReplyServiceImpl implements ReplyService{
 	}
 	
 	public void writeReply(ReplyVO vo) throws Exception {
-		System.out.println("replyWrite");
 		dao.writeReply(vo);
+	}
+	
+	public void updateReply(ReplyVO vo) throws Exception {
+		dao.updateReply(vo);
+	}
+	
+	public void deleteReply(ReplyVO vo) throws Exception {
+		dao.deleteReply(vo);
+	}
+	
+	public ReplyVO selectReply(int rno) throws Exception {
+		return dao.selectReply(rno);
 	}
 }

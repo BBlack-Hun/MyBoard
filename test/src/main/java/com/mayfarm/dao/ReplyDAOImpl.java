@@ -52,6 +52,9 @@ public class ReplyDAOImpl implements ReplyDAO{
 		sql.delete("repplyMapper.deleteReply", vo);
 	}
 	
+	/**
+	 * rno에 해당하는 댓글을 불러온다.
+	 */
 	public ReplyVO selectReply(int rno) throws Exception {
 		return sql.selectOne("replyMapper.selectReply", rno);
 	}
