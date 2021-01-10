@@ -99,7 +99,7 @@ public class HomeController {
 		List<ReplyVO> replyList = replyService.readReply(boardVO.getNo());
 		model.addAttribute("replyList", replyList);
 		
-		return "board/readView";
+		return "/board/readView";
 	}
 	
 	// 게시글 수정뷰
