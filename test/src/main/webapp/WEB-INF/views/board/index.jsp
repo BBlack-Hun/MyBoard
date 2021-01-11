@@ -12,7 +12,7 @@
 	 	<title>게시판</title>
 	</head>
 	<body>
-		<div id="container">
+		<div class="container">
 			<header>
 				<h1> 게시판</h1>
 				<style type="text/css">
@@ -21,10 +21,10 @@
 			</header>
 			<hr />
 			<div>
-				<div>
-					<input type="button" value ="글쓰기" onClick="location.href='/board/writeView'">
-					<input type="button" value ="처음으로" onClick="location.href='/'">
-				</div>
+				<%@include file="nav.jsp" %>
+				<ul>
+					<li><input type="button" value ="처음으로" onClick="location.href='/'"></li>
+				</ul>
 			</div>
 			<hr />
 			

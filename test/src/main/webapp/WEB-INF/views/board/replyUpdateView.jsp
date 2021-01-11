@@ -21,14 +21,14 @@
 					   + "&perPageNum=${scrl.perPageNum}"
 					   + "&searchType=${scrl.searchType}"
 					   + "&keyword=${scrl.keyword}";
-			})
+			});
 			
 		})
 		
 	</script>
 	<body>
 	
-		<div id="root">
+		<div class="container">
 			<header>
 				<h1> 게시판</h1>
 			</header>
@@ -41,25 +41,23 @@
 			
 			<section id="container">
 				<form name="updateForm" role="form" method="post" action="/board/replyUpdate">
-					<input type="hidden" name="no" value="${replyUpdate.no}" readonly="readonly"/>
+					<input type="hidden" id="no" name="no" value="${replyUpdate.no}" />
 					<input type="hidden" id="rno" name="rno" value="${replyUpdate.rno}" />
 					<input type="hidden" id="page" name="page" value="${scrl.page}"> 
 					<input type="hidden" id="perPageNum" name="perPageNum" value="${scrl.perPageNum}"> 
 					<input type="hidden" id="searchType" name="searchType" value="${scrl.searchType}"> 
 					<input type="hidden" id="keyword" name="keyword" value="${scrl.keyword}"> 
-					<table>
-						<tbody>
-							<tr>
-								<td>
-									<label for="content">댓글 내용</label><input type="text" id="content" name="content" value="${replyUpdate.content}"/>
-								</td>
-							</tr>	
-							
-						</tbody>			
-					</table>
+					
+					<div class="form-group">
+						<label for="content" class="col-sm-2 control-label">댓글 내용</label>
+						<div class="col-sm-10">
+							<input type="text" id="content" name="content" value="${replyUpdate.content}" class="form-control"/>
+<%-- 						<input type="text" id="no" name="no" value="${replyUpdate.no}" /> --%>
+						</div>
+					</div>
 					<div>
-						<button type="submit" class="update_btn">저장</button>
-						<button type="button" class="cancel_btn">취소</button>
+						<button type="submit" class="update_btn btn btn-succes">저장</button>
+						<button type="button" class="cancel_btn btn btn-primary">취소</button>
 					</div>
 				</form>
 			</section>

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.mayfarm.dao.BoardDAO;
 import com.mayfarm.vo.BoardVO;
-import com.mayfarm.vo.Criteria;
 import com.mayfarm.vo.SearchCriteria;
 
 @Service

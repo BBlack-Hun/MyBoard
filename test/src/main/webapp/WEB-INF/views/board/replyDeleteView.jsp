@@ -28,7 +28,7 @@
 	</script>
 	<body>
 	
-		<div id="root">
+		<div class="container">
 			<header>
 				<h1> 게시판</h1>
 			</header>

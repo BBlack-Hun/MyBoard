@@ -22,7 +22,7 @@
 	
 	<!-- 댓글 수정 -->
 	<update id="updateReply" parameterType="com.mayfarm.vo.ReplyVO">
-		UPDATE myreply set Bcontent = #{content}
+		UPDATE myreply set Rcontent = #{content}
 		WHERE Rno = #{rno}
 	</update>
 	
@@ -34,7 +34,7 @@
 	<!-- 선택된 댓글 조회 -->
 	<select id="selectReply" resultType="com.mayfarm.vo.ReplyVO">
 		SELECT
-			Bno, Rno, Rcontent, Rwriter, RregDt
+			Bno as no, Rno as rno, Rcontent as content, Rwriter as writer, RregDt as regDt
 		FROM myreply
 		WHERE Rno = #{rno}
 	</select>

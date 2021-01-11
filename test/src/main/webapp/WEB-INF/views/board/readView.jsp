@@ -76,7 +76,7 @@
 	</script>
 	<body>
 	
-		<div id="root">
+		<div class="container">
 			<header>
 				<h1> 게시판</h1>
 			</header>
@@ -95,41 +95,32 @@
 					<input type="hidden" id="searchType" name="searchType" value="${scrl.searchType}"> 
 					<input type="hidden" id="keyword" name="keyword" value="${scrl.keyword}"> 
 				</form>
-				<table>
-					<tbody>
-						<tr>
-							<td>
-								<label for="title">제목</label><input type="text" id="title" name="title" value="${read.title}" readonly="readonly"/>
-							</td>
-						</tr>	
-						<tr>
-							<td>
-								<label for="content">내용</label><textarea id="content" name="content" readonly="readonly" ><c:out value="${read.content}" /></textarea>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<label for="writer">작성자</label><input type="text" id="writer" name="writer" value="${read.writer}" readonly="readonly" />
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<label for="regdate">작성날짜</label>
-								<fmt:formatDate value="${read.regDt}" pattern="yyyy-MM-dd a h:mm"/>					
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<label for="regdate">수정날짜</label>
-								<fmt:formatDate value="${read.modDt}" pattern="yyyy-MM-dd a h:mm"/>					
-							</td>
-						</tr>		
-					</tbody>			
-				</table>
+				
+				<div class="form-group">
+					<label for="title" class="col-sm-2 control-label">제목</label>
+					<input type="text" id="title" name="title" class="form-control" value="${read.title}" readonly="readonly"/>
+				</div>
+				<div class="form-group">	
+					<label for="content" class="col-sm-2 control-label">내용</label>
+					<textarea id="content" name="content" class="form-control" readonly="readonly" ><c:out value="${read.content}" /></textarea>
+				</div>
+				<div class="form-group">
+					<label for="writer" class="col-sm-2 control-label">작성자</label>
+					<input type="text" id="writer" name="writer" value="${read.writer}" class="form-control" readonly="readonly" />
+				</div>
+				<div class="form-group">			
+					<label for="regdate" class="col-sm-2 control-label">작성날짜</label>
+					<fmt:formatDate value="${read.regDt}" pattern="yyyy-MM-dd a h:mm"/>
+				</div>					
+				<div class="form-group">
+					<label for="regdate" class="col-sm-2 control-label">수정날짜</label>
+					<fmt:formatDate value="${read.modDt}" pattern="yyyy-MM-dd a h:mm"/>					
+				</div>
+				
 				<div>
-					<button type="submit" class="update_btn">수정</button>
-					<button type="submit" class="delete_btn">삭제</button>
-					<button type="submit" class="list_btn">목록</button>	
+					<button type="submit" class="update_btn btn btn-worning">수정</button>
+					<button type="submit" class="delete_btn btn btn--danger">삭제</button>
+					<button type="submit" class="list_btn btn btn-primary">목록</button>	
 				</div>
 				
 				<!-- 댓글 -->
@@ -144,28 +135,39 @@
 								
 								<p>${replyList.content}</p>
 								<div>
-									<button type="button" class="replyUpdateBtn" data-rno="${replyList.rno}">수정</button>
-									<button type="button" class="replyDeleteBtn" data-rno="${replyList.rno}">삭제</button>
+									<button type="button" class="replyUpdateBtn btn btn-warning" data-rno="${replyList.rno}">수정</button>
+									<button type="button" class="replyDeleteBtn btn btn-danger" data-rno="${replyList.rno}">삭제</button>
 								</div>
 							</li>
 						</c:forEach> 
 					</ol>
 				</div>
 				
-				<form name="replyForm" method="post">
+				<form name="replyForm" method="post" class="form-horizontal">
 					<input type="hidden" id="no" name="no" value="${read.no}" />
 					<input type="hidden" id ="page" name="page" value="${scrl.page}" />
 					<input type="hidden" id="perPageNum" name="perPageNum" value="${scrl.perPageNum}"> 
 					<input type="hidden" id="searchType" name="searchType" value="${scrl.searchType}">
 					<input type="hidden" id="keyword" name="keyword" value="${scrl.keyword }" >
 					
-					<div>
-						<label for="writer">댓글 작성자</label><input type="text" id="writer" name="writer" />
-						<br/>
-						<label for="content">댓글 내용</label><input type="text" id="content" name="content" />
+					<div class="form-group">
+						<label for="writer" class="col-sm-2 control-label">댓글 작성자</label>
+						<div class="col-sm-10">
+							<input type="text" id="writer" name="writer" class="form-control"/>
+						</div>
 					</div>
-					<div>
-						<button type="button" class="replyWriteBtn">작성</button>
+					
+					<div class="form-group">
+						<label for="content" class="col-sm-2 control-label">댓글 내용</label>
+						<div class="col-sm-10">
+							<input type="text" id="content" name="content" class="form-control"/>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+							<button type="button" class="replyWriteBtn btn btn-success">작성</button>
+						</div>
 					</div>
 				</form>	
 			</section>

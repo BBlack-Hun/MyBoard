@@ -34,7 +34,7 @@
 	</script>
 	<body>
 	
-		<div id="root">
+		<div class="container">
 			<header>
 				<h1> 게시판</h1>
 			</header>
@@ -47,30 +47,31 @@
 			
 			<section id="container">
 				<form name="writeForm" method="post" action="/board/write">
-					<table>
-						<tbody>
-							<tr>
-								<td>
-									<label for="title">제목</label><input type="text" id="title" name="title" class="chk" title="제목을 입력하세요." />
-								</td>
-							</tr>	
-							<tr>
-								<td>
-									<label for="content">내용</label><textarea id="content" name="content" class="chk" title="내용을 입력하세요."></textarea>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<label for="writer">작성자</label><input type="text" id="writer" name="writer" class="chk" title="작성자를 입력하세요."/>
-								</td>
-							<tr>
-								<td>						
-									<button class="write_btn" type="submit">작성</button>
-									<input type="button" value="취소" onClick="location.href='/board/index'">
-								</td>
-							</tr>			
-						</tbody>			
-					</table>
+					<div class="form-group">
+						<label for="title" class="col-sm-2 control-label">제목</label>
+						<div>
+							<input type="text" id="title" name="title" class="chk form-control" title="제목을 입력하세요." />
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label for="content" class="col-sm-2 control-label">내용</label>
+						<div>
+							<textarea id="content" name="content" class="chk form-control" title="내용을 입력하세요."></textarea>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label for="writer" class="col-sm-2 control-label">작성자</label>
+						<div>
+							<input type="text" id="writer" name="writer" class="chk form-control" title="작성자를 입력하세요."/>
+						</div>
+					</div>
+					
+					<div>
+						<button class="write_btn btn btn-success" type="submit">작성</button>
+						<button type="button" class="btn btn-primary" onclick="location.href='/board/index'">취소</button>
+					</div>
 				</form>
 			</section>
 			<hr />

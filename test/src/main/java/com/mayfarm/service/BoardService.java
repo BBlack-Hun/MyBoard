@@ -3,7 +3,6 @@ package com.mayfarm.service;
 import java.util.List;
 
 import com.mayfarm.vo.BoardVO;
-import com.mayfarm.vo.Criteria;
 import com.mayfarm.vo.SearchCriteria;
 
 public interface BoardService {

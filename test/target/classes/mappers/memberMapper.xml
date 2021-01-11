@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="memberMapper">
+	
+	<!--회원가입 쿼리 
+		id, 비밀번호, 이름, 가입날짜, 신규가입(1), 관리자 계정인지 일반계정인지 확인후 들어감-->
+	
+	<insert id="insertUser">
+		INSERT INTO users
+		VALUE (#{userid}, #{passwd}, #{name}, 1, #{authority})
+	</insert>
+	
+	<select id ="selectUser" resultType="java.util.Map">
+		select
+			userid as username,
+			passwd as password,
+			name,
+			enabled,
+			authority
+		from users	<!-- mymember 테이블로부터 검색 -->
+		where userid = #{userid} <!-- userid가 내가 입력한 userid와 같은경우 -->
+		<!-- 여기서 검색한 쿼리는 hashmap으로 저장되어 dao로 보내진다. -->
+	</select>
+	
+</mapper>

@@ -8,7 +8,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.mayfarm.vo.BoardVO;
-import com.mayfarm.vo.Criteria;
 import com.mayfarm.vo.SearchCriteria;
 
 @Repository
