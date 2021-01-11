@@ -22,7 +22,7 @@
 	
 	<!-- 	게시판 목록 보기(보고 싶은 것만 지정해 줄떄는 as를 사용하여 BoardVO의 이름을 매핑해 줘야 한다
 		안그러면 null값이 들어감-->
-	<select id="listPage" resultType="com.mayfarm.vo.BoardVO" parameterType="com.mayfarm.vo.SearchCriteria">
+	<select id="listPage" resultType="com.mayfarm.board.vo.BoardVO" parameterType="com.mayfarm.board.vo.SearchCriteria">
 		select	VO.Bno as no,
 				VO.Btitle as title,
 				VO.Bwriter as writer,
@@ -42,7 +42,7 @@
 	</select>
 	
 	<!-- 게시물 총 갯수 -->
-	<select id="listCount" resultType="int" parameterType="com.mayfarm.vo.SearchCriteria">
+	<select id="listCount" resultType="int" parameterType="com.mayfarm.board.vo.SearchCriteria">
 		SELECT COUNT(Bno)
 			FROM myboard
 			WHERE 1=1
@@ -62,7 +62,7 @@
 	</sql>
 	
 	<!-- 게시물 조회 -->
-	<select id="read" parameterType="int" resultType="com.mayfarm.vo.BoardVO">
+	<select id="read" parameterType="int" resultType="com.mayfarm.board.vo.BoardVO">
 		SELECT	Bno as no,
 				Btitle as title,
 				Bcontent as content,
@@ -75,7 +75,7 @@
 	</select>
 	
 	<!-- 게시물 수정 -->
-	<update id="update" parameterType="com.mayfarm.vo.BoardVO">
+	<update id="update" parameterType="com.mayfarm.board.vo.BoardVO">
 		UPDATE	myboard
 		SET	Btitle = #{title},
 			Bcontent = #{content},

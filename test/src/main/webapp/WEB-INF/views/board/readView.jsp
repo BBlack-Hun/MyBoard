@@ -118,8 +118,8 @@
 				</div>
 				
 				<div>
-					<button type="submit" class="update_btn btn btn-worning">수정</button>
-					<button type="submit" class="delete_btn btn btn--danger">삭제</button>
+					<button type="submit" class="update_btn btn btn-warning">수정</button>
+					<button type="submit" class="delete_btn btn btn-danger">삭제</button>
 					<button type="submit" class="list_btn btn btn-primary">목록</button>	
 				</div>
 				

@@ -5,7 +5,7 @@
 <mapper namespace="replyMapper">
 	
 	<!-- 댓글 조회 -->
-	<select id="readReply" resultType="com.mayfarm.vo.ReplyVO">
+	<select id="readReply" resultType="com.mayfarm.board.vo.ReplyVO">
 		SELECT
 			Rno as rno, Rcontent as content, Rwriter as writer, RregDt as regDt
 		FROM myreply
@@ -21,18 +21,18 @@
 	</insert>
 	
 	<!-- 댓글 수정 -->
-	<update id="updateReply" parameterType="com.mayfarm.vo.ReplyVO">
+	<update id="updateReply" parameterType="com.mayfarm.board.vo.ReplyVO">
 		UPDATE myreply set Rcontent = #{content}
 		WHERE Rno = #{rno}
 	</update>
 	
 	<!-- 댓글 삭제 -->
-	<delete id = "deleteReply" parameterType="com.mayfarm.vo.ReplyVO">
+	<delete id = "deleteReply" parameterType="com.mayfarm.board.vo.ReplyVO">
 		DELETE FROM myreply
 		WHERE Rno = {rno}
 	</delete>
 	<!-- 선택된 댓글 조회 -->
-	<select id="selectReply" resultType="com.mayfarm.vo.ReplyVO">
+	<select id="selectReply" resultType="com.mayfarm.board.vo.ReplyVO">
 		SELECT
 			Bno as no, Rno as rno, Rcontent as content, Rwriter as writer, RregDt as regDt
 		FROM myreply
