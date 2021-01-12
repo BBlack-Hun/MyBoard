@@ -5,16 +5,35 @@
 <head>
 	<title>Home</title>
 </head>
+<script language="JavaScript">
+	function printTime() {
+		var clock = document.getElementById("clock");
+		var now = new Date();
+		
+		clock.innerHTML = now.getFullYear() + "년 " +
+		(now.getMonth()+1) + "월 " +
+		now.getDate() + "일 " +
+		now.getHours() + "시 " +
+		now.getMinutes() + "분 " +
+		now.getSeconds() + "초";
+		
+		setTimeout("printTime()", 1000);
+		}
+		
+		window.onload = function() {
+		printTime();
+	};
+</script>
 <body>
-<h1>
-	애옹이야 게시판이야~~~ 
-</h1>
 <sec:authorize access="isAnonymous()">
+	<h1>입구컷..</h1>
+	<span id="clock"></span>
     <h5><a href='<c:url value="/users/login"/>'>LOGIN</a> 로그인 해주세요.</h5>
-    <P>  The time on the server is ${serverTime}. </P>
 </sec:authorize>
 <sec:authorize access="isAuthenticated()">
-	<a href="#" onclick="document.getElementById('logout-form').submit();">Sign out</a>
+	<h1>어서오세요 ㅎㅎ</h1>
+	<span id="clock"></span>
+	<p><a href="#" onclick="document.getElementById('logout-form').submit();">Sign out</a></p>
 	<form id="logout-form" action='<c:url value='/logout'/>' method="POST">
 		<input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
 	</form>

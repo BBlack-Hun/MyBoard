@@ -36,7 +36,7 @@ public class UserController {
 		}
 	}
 	
-	@PostMapping("/users/login-processing")
+	@PostMapping("/users/login")
 	public void loginProcessing(String error) {
 		logger.info("login-processing!");
 		logger.info("err :" + error );
@@ -63,7 +63,7 @@ public class UserController {
 		logger.info("register");
 		
 		service.register(userVO);
-		return "/users/login";
+		return "redirect:/users/login";
 		
 	}
 

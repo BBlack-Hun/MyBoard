@@ -11,8 +11,8 @@
 <h1>Register</h1>
 <form action="/users/register" method="post">
 	<div> id <input type="text" name="id" /> </div> 
-	<div> pw <input type="password" name="password" /> </div> 
-	<div> name <input type="text" name="name" /> </div> 
+	<div> pw <input type="password" name="passwd"  /> </div> 
+	<div> name <input type="text" name="name"/> </div> 
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
 	<div> <input type="submit" value="회원가입"/> </div> 
 </form>

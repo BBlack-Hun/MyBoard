@@ -16,7 +16,7 @@
 	        <c:remove var="SPRING_SECURITY_LAST_EXCEPTION" scope="session"/>
 	    </font>
 	</c:if>
-    <form class="px-4 py-3" name="f" action="/login" method="POST">
+    <form class="px-4 py-3" name="f" action="/users/login" method="POST">
         <table>
             <tbody>
                 <tr>
@@ -29,6 +29,7 @@
                 </tr>
                 <tr>
                     <td colspan="2"><input name="submit" type="submit" value="Login"></td>
+                    <td><button type="button" name="register" onclick="location.href='/users/registerView'">회원가입</button> </td>
                 </tr>
                 <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}">
             </tbody>

@@ -7,5 +7,5 @@
 <ul>
 	<li><input type="button" value ="글쓰기" onClick="location.href='/board/writeView'"></li>
 	<li><input type="button" value ="홈으로" onClick="location.href='/board/index'"></li>
-	<li><input type="button" value ="로그인" onClick="location.href=''"></li>
+<!-- 	<li><input type="button" value ="로그인" onClick="location.href=''"></li> -->
 </ul>

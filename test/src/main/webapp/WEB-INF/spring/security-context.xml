@@ -15,34 +15,28 @@
 		<form-login
 			username-parameter="username"
 			password-parameter="password"
-			login-processing-url="/login"
+			login-processing-url="/users/login"
 			login-page="/users/login"
 			default-target-url="/" />
 		        
 		<logout
 			logout-url="/logout"
 			logout-success-url="/" />
+		
+		<access-denied-handler error-page="/access_denied_page" /> 
 	</http>
 	
-	<authentication-manager>
-		<authentication-provider>
-			<user-service>
-				<user name="user" password="{noop}userPw" authorities="ROLE_USER"/>
-				<user name="member" password="{noop}memPw" authorities="ROLE_MEMBER"/>
-				<user name="admin" password="{noop}admin" authorities="ROLE_ADMIN"/>
-			</user-service>
-		</authentication-provider>
-	</authentication-manager>
-        
-<!--         <access-denied-handler error-page="/access_denied_page" /> -->
 	<jdbc-user-service data-source-ref="dataSource" id="userService"
-	users-by-username-query="SELECT id as username, passwd as password, enabled FROM users WHERE id=?"
-	authorities-by-username-query="SELECT id as username, auth FROM users WHERE id=?" />
+		users-by-username-query="SELECT id as username, passwd as password, enabled FROM users WHERE id=?"
+		authorities-by-username-query="SELECT id as username, auth FROM users WHERE id=?" />
 	        
 	<authentication-manager>
 		<authentication-provider user-service-ref="userService">
+			<password-encoder hash="bcrypt" />			
 		</authentication-provider>
 	</authentication-manager>
+	
+	<beans:bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
 
 	
 
